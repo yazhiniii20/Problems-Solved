@@ -1,0 +1,23 @@
+class Solution {
+    public int totalElements(int[] nums) {
+      int n = nums.length;
+      int max = 0;
+      for(int i=0;i<n;i++){
+          for(int j=i;j<n;j++){
+               int len = isDistinct(nums,i,j);
+               max = Math.max(max,len);
+          }
+      }
+       return max; 
+    }
+    static int isDistinct(int[] nums,int start,int end){
+        if(start == end){
+            return 0;
+        }
+        HashSet<Integer> set = new HashSet<>();
+        for(int i=start;i<=end;i++){
+            set.add(nums[i]);
+        }
+        return (set.size() <= 2)?end-start+1:0;
+    }
+}

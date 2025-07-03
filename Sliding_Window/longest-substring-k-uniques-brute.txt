@@ -1,0 +1,27 @@
+class Solution {
+    public int longestKSubstr(String s, int k) {
+        int n = s.length();
+        if(k > n){
+            return -1;
+        }
+        int maxLen = -1;
+        for(int i=0;i<n;i++){
+          for(int j=i;j<n;j++){
+              String temp = s.substring(i,j+1);
+              int len = kUnique(temp,k);
+              maxLen = Math.max(maxLen,len);
+          }
+        }
+        return maxLen;
+    }
+    static int kUnique(String str,int k){
+        if(str.length() == 0){
+            return 0;
+        }
+        HashSet<Character> set = new HashSet<>();
+        for(char ch:str.toCharArray()){
+            set.add(ch);
+        }
+        return (set.size() == k)?str.length():-1;
+    }
+}
